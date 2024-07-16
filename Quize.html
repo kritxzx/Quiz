@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <title>Quiz Python</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            font-size: medium;
+            color: #fff;
+            background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #0b291d;
+            margin-top: 75px;
+        }
+        .E {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-top: 75px;
+        }
+
+        .quiz-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .quiz-container p {
+            font-size: 1.2em;
+        }
+
+        button {
+            font-weight: bold;
+            font-size: 1em;
+            color: white;
+            background-color: #3c4e49;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            text-align: left;
+        }
+
+        button:hover {
+            background-color: #647e76;
+        }
+
+        button:active {
+            background-color: #364944;
+        }
+
+        .correct {
+            background-color: #d4edda;
+        }
+
+        .incorrect {
+            background-color: #f8d7da;
+        }
+
+        .score {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #0b291d;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Python is easy?</h1>
+    <div class="score" id="score">Score: 0/20</div>
+    <div class="quiz-container" id="quiz">
+        <!-- Questions go here -->
+    </div>
+    <h1 class="E">End</h1>
+
+    <script>
+        const questions = [
+            { q: "Python คืออะไร?", a: ["ชนิดของงู", "ภาษาการเขียนโปรแกรม", "แบรนด์ของคอมพิวเตอร์", "วิดีโอเกม"], correct: 1 },
+            { q: "สัญลักษณ์ใดใช้ในการทำคอมเมนต์ใน Python?", a: ["//", "#", "/*", "%"], correct: 1 },
+            { q: "วิธีการประกาศตัวแปรใน Python คืออย่างไร?", a: ["var x = 5", "int x = 5", "x = 5", "let x = 5"], correct: 2 },
+            { q: "คำสั่งใดใช้ในการพิมพ์ข้อความใน Python?", a: ["print(\"Hello, World!\")", "echo \"Hello, World!\"", "printf(\"Hello, World!\")", "cout << \"Hello, World!\""], correct: 0 },
+            { q: "ชนิดข้อมูลใดที่ไม่ใช่ชนิดข้อมูลพื้นฐานใน Python?", a: ["int", "float", "double", "str"], correct: 2 },
+            { q: "ผลลัพธ์ของคำสั่ง `print(2 + 3 * 4)` คืออะไร?", a: ["14", "20", "24", "11"], correct: 0 },
+            { q: "คำสั่งใดใช้ในการรับข้อมูลจากผู้ใช้ใน Python?", a: ["read()", "input()", "scan()", "get()"], correct: 1 },
+            { q: "อะไรคือค่าเริ่มต้นของดัชนี (index) ใน Python lists?", a: ["0", "-1", "1", "2"], correct: 0 },
+            { q: "คำสั่งใดใช้ในการสร้างฟังก์ชันใน Python?", a: ["function myFunction()", "def myFunction()", "func myFunction()", "create myFunction()"], correct: 1 },
+            { q: "บรรทัดใดเป็นบรรทัดที่ถูกต้องในการใช้เงื่อนไข if ใน Python?", a: ["if x == 10:", "if (x == 10)", "if x = 10:", "if x == 10 then"], correct: 0 },
+            { q: "คำสั่งใดที่ถูกต้องสำหรับการพิมพ์เครื่องหมาย \\ ใน Python?", a: ["print(‘\\’)", "print(“\\\\”)", "print(‘\\\\’)", "print(“\\”)"], correct: 1 },
+            { q: "ผลลัพธ์ของคำสั่ง x = 2, y = 3; print(x + y) จะเป็นเท่าใด?", a: ["5", "6", "23", "2+3"], correct: 0 },
+            { q: "คำสั่งใดที่ถูกต้องในการประกาศตัวแปรหลายตัวพร้อมกันใน Python?", a: ["a = b = c = 10", "a, b, c = 10", "a = 10, b = 10, c = 10", "a = b, c = 10"], correct: 0 },
+            { q: "ตัวดำเนินการใดใน Python ที่ใช้ในการยกกำลัง?", a: ["+", "*", "/", "**"], correct: 3 },
+            { q: "ผลลัพธ์ของการคำนวณ 3 + 5 * 2 ใน Python จะเป็นเท่าใด?", a: ["16", "13", "10", "15"], correct: 1 },
+            { q: "ผลลัพธ์ของคำสั่ง 2 ** 3 จะเป็นเท่าใด?", a: ["8", "5", "6", "9"], correct: 0 },
+            { q: "ตัวดำเนินการใดที่ใช้ในการหาผลลัพธ์จากการหารเอาเศษใน Python?", a: ["//", "%", "**", "&"], correct: 1 },
+            { q: "ประเภทข้อมูลใดต่อไปนี้ที่ใช้ในการเก็บค่าทศนิยมใน Python?", a: ["int", "float", "str", "bool"], correct: 1 },
+            { q: "ผลลัพธ์ของคำสั่ง print(2 + 3 * 6) จะเป็นเท่าใด?", a: ["20", "30", "18", "11"], correct: 0 },
+            { q: "คำสั่งใดที่ถูกต้องในการพิมพ์ผลลัพธ์ของตัวแปร a ใน Python?", a: ["echo(a)", "print(a)", "write(a)", "print a"], correct: 1 }
+        ];
+
+        let score = 0;
+        let answered = 0;
+        const totalQuestions = questions.length;
+        const quizContainer = document.getElementById('quiz');
+        const scoreContainer = document.getElementById('score');
+
+        questions.forEach((question, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = `question-${index + 1}`;
+            questionDiv.innerHTML = `<p>${index + 1}. ${question.q}</p>`;
+            question.a.forEach((answer, i) => {
+                const button = document.createElement('button');
+                button.innerText = `${String.fromCharCode(65 + i)}. ${answer}`;
+                button.onclick = () => checkAnswer(button, i === question.correct, questionDiv);
+                questionDiv.appendChild(button);
+            });
+            quizContainer.appendChild(questionDiv);
+        });
+
+        function checkAnswer(button, isCorrect, questionDiv) {
+            if (!questionDiv.classList.contains('answered')) {
+                answered++;
+                questionDiv.classList.add('answered');
+                if (isCorrect) {
+                    button.classList.add('correct');
+                    score++;
+                } else {
+                    button.classList.add('incorrect');
+                }
+                updateScore();
+            }
+        }
+
+        function updateScore() {
+            scoreContainer.innerText = `Score: ${score}/${totalQuestions}`;
+        }
+    </script>
+</body>
+
+</html>
