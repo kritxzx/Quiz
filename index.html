@@ -24,12 +24,6 @@
             margin-top: 75px;
         }
 
-        .E {
-            font-size: 2.5em;
-            color: #ffffff;
-            margin-top: 75px;
-        }
-
         .quiz-container {
             background: rgba(0, 0, 0, 0.6);
             padding: 20px;
@@ -140,8 +134,8 @@
 </head>
 
 <body>
-    <h1>Python is easy?</h1>
-    <div class="score" id="score">Score: 0/30</div>
+    <h1>Python Quiz</h1>
+    <div class="score" id="score">Score: 0/20</div>
     <div class="name-container" id="name-container">
         <p>กรุณากรอกชื่อของคุณ:</p>
         <input type="text" id="username" placeholder="Your name">
@@ -150,42 +144,31 @@
     <div class="quiz-container" id="quiz" style="display: none;">
         <!-- Questions go here -->
     </div>
-    <h1 class="E">End</h1>
 
     <script>
         let username = '';
 
         const questions = [
-            { q: "การใช้คำสั่ง print เพื่อพิมพ์ 'I’m data science man' โดยใช้เครื่องหมาย escape characters ต้องใช้คำสั่งใด?", a: ["print(‘I’m data science man’)", "print(“I’m data science man”)", "print(‘I\\’m data science man’)", "print(“I\\’m data science man”)"], correct: 2 },
-            { q: "ในการใช้คำสั่ง print พิมพ์ข้อความหลายบรรทัดด้วยเครื่องหมาย ' ใช้อย่างไร?", a: ["print(‘’‘บรรทัดที่ 1 \\n บรรทัดที่ 2’’‘)", "print(‘’‘บรรทัดที่ 1\\nบรรทัดที่ 2’’‘)", "print(‘’‘บรรทัดที่ 1 \\nบรรทัดที่ 2 \\nบรรทัดที่ 3’’‘)", "print(‘’‘บรรทัดที่ 1 \\t บรรทัดที่ 2’’‘)"], correct: 2 },
-            { q: "การใช้คำสั่ง print พิมพ์ตัวเลขในรูปทศนิยมและระบุจำนวนทศนิยมใช้คำสั่งใด?", a: ["print(“%.2f” % 100.55)", "print(“%.10f” % pi)", "print(“%.3f” % 100.55)", "print(“%.5f” % pi)"], correct: 1 },
-            { q: "ข้อใดต่อไปนี้เป็นตัวแปรที่ตั้งชื่อไม่ถูกต้อง?", a: ["5name", "name5", "_name", "name_"], correct: 0 },
-            { q: "การรับค่าตัวแปรทางคีย์บอร์ดด้วยคำสั่ง input() เพื่อรับข้อมูลชื่อผู้ใช้ต้องเขียนอย่างไร?", a: ["name = input(กรุณาระบุชื่อ: )", "name = input(‘กรุณาระบุชื่อ: ’)", "name = input(“กรุณาระบุชื่อ: ”)", "name = input(‘กรุณาระบุชื่อ: “)"], correct: 2 },
-            { q: "จงพิจารณาคำสั่ง a, b, c = 1, 2, 3 ผลลัพธ์ของตัวแปร b คืออะไร?", a: ["1", "2", "3", "4"], correct: 1 },
-            { q: "การกำหนดตัวแปรหลายตัวในครั้งเดียว โดยให้มีค่าต่างกันควรใช้คำสั่งใด?", a: ["a = 10, b = 20, c = 30", "a = b = c = 10", "a, b, c = 10, 20, 30", "a = 10; b = 20; c = 30"], correct: 2 },
-            { q: "การคำนวณ 2 ** 2 ** 3 มีค่าเท่ากับเท่าไร?", a: ["16", "64", "256", "1024"], correct: 2 },
-            { q: "การคำนวณ 3 / 5 * 2 ตามลำดับการคำนวณมีค่าเท่าไร?", a: ["0.6", "1.2", "3.0", "5.0"], correct: 1 },
-            { q: "คำสั่งใดที่ใช้แสดงผลลัพธ์ I am 20 years old and my number is 10?", a: ["print(“I am”, 20, “years old and my number is”, 10)", "print(“I am %d years old and my number is %d” %(20,10))", "print(“I am ” + str(20) + “ years old and my number is ” + str(10))", "print(“I am %d years old and my number is %d” %(30,10))"], correct: 1 },
-            { q: "การประกาศตัวแปร if = 20 เป็นไปได้หรือไม่?", a: ["เป็นไปได้", "เป็นไปไม่ได้ เพราะ if เป็นคำสงวน", "เป็นไปไม่ได้ เพราะไม่สามารถใช้ตัวเลขในชื่อตัวแปรได้", "เป็นไปไม่ได้ เพราะใช้เครื่องหมายผิด"], correct: 1 },
-            { q: "ถ้ากำหนดให้ a = 2.5 / 2.0 ค่า a จะเป็นประเภทใด?", a: ["Integer", "String", "Floating Point", "Complex"], correct: 2 },
-            { q: "การคำนวณ 2 + 5 * 6 / 3 + (7 - 2 * 3) ผลลัพธ์ที่ได้คืออะไร?", a: ["13.0", "15.0", "17.0", "20.0"], correct: 0 },
-            { q: "การเปลี่ยนค่าตัวแปร x = 10; x = x * 2 + 5 ค่า x สุดท้ายมีค่าเท่าไร?", a: ["20", "25", "30", "35"], correct: 1 },
-            { q: "คำสั่ง print(“\\\\”) จะแสดงผลลัพธ์อะไร?", a: ["\\", "\\\\", "\\\\\\", "\\\\\\"], correct: 1 },
-            { q: "กฎการตั้งชื่อตัวแปร ข้อใดไม่ถูกต้อง?", a: ["ชื่อตัวแปรต้องเริ่มด้วยตัวอักษรหรือเครื่องหมาย underscore (_)", "ตัวแปรสามารถประกอบด้วยตัวอักษร ตัวเลข และ underscores", "Python ไม่สนใจตัวพิมพ์เล็ก-ใหญ่", "ไม่ใช้คำสงวน"], correct: 2 },
-            { q: "การคำนวณ 3 * 5.0 / 2 มีค่าเท่ากับเท่าไร?", a: ["7.5", "8.5", "6.5", "9.5"], correct: 0 },
-            { q: "การคำนวณ 2 ** 3 มีค่าเท่ากับเท่าไร?", a: ["6", "7", "8", "9"], correct: 2 },
-            { q: "การใช้ตัวดำเนินการทางคณิตศาสตร์พื้นฐาน 10 % 3 จะมีค่าเท่าไร?", a: ["0", "1", "2", "3"], correct: 1 },
-            { q: "การใช้ input() เพื่อรับค่าจำนวนเต็มจากผู้ใช้แล้วเก็บในตัวแปร age ควรใช้คำสั่งใด?", a: ["age = input(“กรุณาระบุอายุ: ”)", "age = int(input(“กรุณาระบุอายุ: ”))", "age = str(input(“กรุณาระบุอายุ: ”))", "age = float(input(“กรุณาระบุอายุ: ”))"], correct: 1 },
-            { q: "คำสั่ง print(“%d %d %d %d %d” %(1, 2, 3, 4, 5)) จะแสดงผลลัพธ์อย่างไร?", a: ["1 2 3 4 5", "12345", "1, 2, 3, 4, 5", "1-2-3-4-5"], correct: 0 },
-            { q: "การคำนวณ 10 ** 2 มีค่าเท่ากับเท่าไร?", a: ["10", "20", "100", "200"], correct: 2 },
-            { q: "ถ้า x = 5 และ y = 10 คำสั่ง print(x + y) จะได้ผลลัพธ์อย่างไร?", a: ["10", "15", "20", "25"], correct: 1 },
-            { q: "การใช้ print เพื่อพิมพ์ข้อความโดยใช้เครื่องหมาย Double Quote ภายในข้อความต้องเขียนอย่างไร?", a: ["print(‘I like “Data Science” ’)", "print(“I like “Data Science””)", "print(‘I like Data Science’)", "print(‘I like \\“Data Science\\”’)"], correct: 0 },
-            { q: "คำสั่ง print(“%.2f” % pi) ถ้า pi = 3.141592653589793 จะได้ผลลัพธ์อย่างไร?", a: ["3.14", "3.141", "3.1415", "3.14159"], correct: 0 },
-            { q: "การรับค่า a และ b จากคีย์บอร์ดแล้วคำนวณค่า a * b ควรเขียนอย่างไร?", a: ["a = input(); b = input(); print(a * b)", "a = int(input()); b = int(input()); print(a * b)", "a = str(input()); b = str(input()); print(a * b)", "a = float(input()); b = float(input()); print(a * b)"], correct: 1 },
-            { q: "ในการสร้างโปรแกรมที่แสดงผลลัพธ์ My name is Supoj Hengpraphrom ควรใช้คำสั่งใด?", a: ["print(‘My name is’ , “Supoj Hengpraphrom”)", "print(‘My name is’ + “Supoj Hengpraphrom”)", "print(‘My name is %s’ % “Supoj Hengpraphrom”)", "print(‘My name is’ , “John Doe”)"], correct: 1 },
-            { q: "คำสั่ง a = 10; b = a + 5; c = 12; b = a + c; print(a + b + c) จะได้ผลลัพธ์เท่าไร?", a: ["37", "47", "57", "67"], correct: 1 },
-            { q: "การใช้คำสั่ง print(a * b * 2) ถ้า a = 5 และ b = 10 จะได้ผลลัพธ์เท่าไร?", a: ["50", "100", "150", "200"], correct: 1 },
-            { q: "คำสั่ง sum = 1 * 5 + 10 * 7 + 20 * 2 + 100 * 3 ค่า sum สุดท้ายจะเป็นเท่าไร?", a: ["385", "395", "405", "415"], correct: 2 }
+            { q: "คำสั่งใดใช้ในการพิมพ์ข้อความ 'Hello World' ใน Python?", a: ["echo 'Hello World'", "print('Hello World')", "printf('Hello World')", "write('Hello World')"], correct: 1 },
+            { q: "คำสั่งใดใช้ในการพิมพ์ตัวแปร a และ b?", a: ["print('a =', a, 'b =', b)", "print('a = ' + a, 'b = ' + b)", "print('a = %d, b = %d' % (a, b))", "print('a = {} b = {}'.format(a, b))"], correct: 0 },
+            { q: "การรับค่าชื่อผู้ใช้ทางคีย์บอร์ดใช้คำสั่งใด?", a: ["name = input('Please enter your name: ')", "name = get_input('Please enter your name: ')", "name = input()", "name = scan('Please enter your name: ')"], correct: 0 },
+            { q: "ตัวแปรใดต่อไปนี้สามารถตั้งชื่อได้?", a: ["5name", "name_5", "name!", "my-var"], correct: 1 },
+            { q: "คำสั่งใดใช้ในการพิมพ์ข้อความหลายบรรทัด?", a: ["print('''Hello\nWorld''')", "print('Hello\nWorld')", "print('Hello\\nWorld')", "print('Hello World')"], correct: 0 },
+            { q: "การคำนวณ 5 // 2 ให้ผลลัพธ์เป็นอะไร?", a: ["2.5", "2", "3", "2.0"], correct: 1 },
+            { q: "การแปลงสตริง '123' ให้เป็นจำนวนเต็มใช้คำสั่งใด?", a: ["str('123')", "int('123')", "float('123')", "bool('123')"], correct: 1 },
+            { q: "ฟังก์ชันใดใช้ในการตรวจสอบประเภทของตัวแปร?", a: ["checktype()", "type()", "typeof()", "isinstance()"], correct: 1 },
+            { q: "การคำนวณ 3 * 4 + 2 ให้ผลลัพธ์เป็นอะไร?", a: ["10", "12", "14", "20"], correct: 2 },
+            { q: "คำสั่งใดใช้ในการรับค่าจากผู้ใช้เป็นจำนวนเต็ม?", a: ["age = input('Enter your age: ')", "age = int(input('Enter your age: '))", "age = str(input('Enter your age: '))", "age = float(input('Enter your age: '))"], correct: 1 },
+            { q: "คำสั่งใดใช้ในการแสดงผลลัพธ์ 'I am 20 years old'?", a: ["print('I am 20 years old')", "print('I am', 20, 'years old')", "print('I am %d years old' % 20)", "print('I am {} years old'.format(20))"], correct: 2 },
+            { q: "การประกาศตัวแปรหลายตัวพร้อมกันใช้คำสั่งใด?", a: ["a = b = c = 10", "a = 10; b = 10; c = 10", "a, b, c = 10, 10, 10", "ทั้งหมดถูกต้อง"], correct: 3 },
+            { q: "การคำนวณ 2 ** 3 ให้ผลลัพธ์เป็นอะไร?", a: ["6", "8", "9", "16"], correct: 1 },
+            { q: "การคำนวณ 10 % 3 ให้ผลลัพธ์เป็นอะไร?", a: ["0", "1", "2", "3"], correct: 1 },
+            { q: "การแปลงจำนวนจริง 3.14 ให้เป็นจำนวนเต็มใช้คำสั่งใด?", a: ["int(3.14)", "str(3.14)", "float(3.14)", "bool(3.14)"], correct: 0 },
+            { q: "คำสั่งใดใช้ในการเพิ่มค่า a ขึ้น 1?", a: ["a += 1", "a = a + 1", "a++", "ทั้งสองข้อแรก"], correct: 3 },
+            { q: "การใช้คำสั่ง print('\\\\') จะแสดงผลลัพธ์อะไร?", a: ["\\", "\\\\", "\\\\\\", "\\\\\\"], correct: 1 },
+            { q: "การคำนวณ 2 + 5 * 6 / 3 + (7 - 2 * 3) ให้ผลลัพธ์เป็นอะไร?", a: ["13.0", "15.0", "17.0", "20.0"], correct: 0 },
+            { q: "คำสั่งใดที่ใช้ในการคำนวณพื้นที่สี่เหลี่ยมผืนผ้า?", a: ["area = w * h", "area = w + h", "area = w / h", "area = w - h"], correct: 0 },
+            { q: "การคำนวณ 3 / 5 * 2 ให้ผลลัพธ์เป็นอะไร?", a: ["0.6", "1.2", "2.0", "3.0"], correct: 1 }
         ];
 
         let score = 0;
